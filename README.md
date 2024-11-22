@@ -1,12 +1,16 @@
 # Favicon & Meta Info Fetcher
 
-## 项目介绍
+A powerful web tool to fetch favicons and metadata from any website. Built with Vue 3 and Tailwind CSS.
 
-Favicon & Meta Info Fetcher 是一个用于快速获取网站图标（favicon）和元信息的工具。它可以帮助用户轻松地获取任何网站的图标和元信息，包括标题、关键词、描述等。
+## Features
 
-## 项目功能
+- 🎯 Fetch favicons in multiple sizes
+- 📝 Extract meta descriptions and keywords
+- 📋 One-click copy functionality
+- 🌐 Multi-language support (English/Chinese)
+- 🎨 Modern and responsive design
+- ⚡ Fast and lightweight
 
-- 获取网站图标（favicon）
-- 获取网站标题（title）
-- 获取网站关键词（keywords）
-- 获取网站描述（description）
+## Demo
+
+Try it out: [Live Demo](https://naroat.github.io/favicon/)
