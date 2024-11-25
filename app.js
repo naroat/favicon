@@ -7,6 +7,50 @@ const i18n = createI18n({
     messages
 })
 
+// 添加一个获取favicon的函数
+async function getFavicon(url) {
+    const faviconPaths = [
+        '/favicon.ico',
+        '/favicon.png',
+        '/apple-touch-icon.png',
+        '/apple-touch-icon-precomposed.png'
+    ];
+    
+    try {
+        // 首先尝试从HTML中获取favicon链接
+        const response = await fetch(url);
+        const html = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        
+        // 查找所有可能的favicon链接
+        const iconLinks = doc.querySelectorAll('link[rel*="icon"]');
+        if (iconLinks.length > 0) {
+            return iconLinks[0].href;
+        }
+        
+        // 如果HTML中没有找到，尝试常见的favicon路径
+        const urlObj = new URL(url);
+        for (const path of faviconPaths) {
+            try {
+                const faviconUrl = urlObj.origin + path;
+                const faviconResponse = await fetch(faviconUrl);
+                if (faviconResponse.ok) {
+                    return faviconUrl;
+                }
+            } catch (e) {
+                continue;
+            }
+        }
+        
+        // 如果都失败了，可以返回一个默认图标
+        return '/default-favicon.png';
+    } catch (error) {
+        console.error('Error fetching favicon:', error);
+        return '/default-favicon.png';
+    }
+}
+
 const app = createApp({
     setup() {
         const url = ref('')
